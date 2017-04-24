@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.ReasonConfigMapper">
+	<resultMap id="BaseResultMap"
+		type="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfig">
+		<id column="REASON_TP" property="reasonTp" jdbcType="CHAR" />
+		<id column="MCHNT_TP" property="mchntTp" jdbcType="CHAR" />
+		<id column="SPEC_DISC_TP" property="specDiscTp" jdbcType="CHAR" />
+		<id column="SPEC_DISC_LVL" property="specDiscLvl" jdbcType="CHAR" />
+		<result column="REC_ST" property="recSt" jdbcType="CHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="REC_CRT_TS" property="recCrtTs" jdbcType="TIMESTAMP" />
+		<result column="REC_UPD_TS" property="recUpdTs" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		REASON_TP, MCHNT_TP, SPEC_DISC_TP, SPEC_DISC_LVL, REC_ST,
+		COMMENTS, REC_CRT_TS,
+		REC_UPD_TS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfigKey">
+		select
+		<include refid="Base_Column_List" />
+		from ARGS.TBL_ARGS_REASON_CONF
+		where REASON_TP =
+		#{reasonTp,jdbcType=CHAR}
+		and MCHNT_TP = #{mchntTp,jdbcType=CHAR}
+		and
+		SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR}
+		and SPEC_DISC_LVL =
+		#{specDiscLvl,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfigKey">
+		delete from ARGS.TBL_ARGS_REASON_CONF
+		where REASON_TP =
+		#{reasonTp,jdbcType=CHAR}
+		and MCHNT_TP = #{mchntTp,jdbcType=CHAR}
+		and
+		SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR}
+		and SPEC_DISC_LVL =
+		#{specDiscLvl,jdbcType=CHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfig">
+		insert into ARGS.TBL_ARGS_REASON_CONF (REASON_TP,
+		MCHNT_TP,
+		SPEC_DISC_TP,
+		SPEC_DISC_LVL, REC_ST, COMMENTS,
+		REC_CRT_TS,
+		REC_UPD_TS)
+		values (#{reasonTp,jdbcType=CHAR},
+		#{mchntTp,jdbcType=CHAR},
+		#{specDiscTp,jdbcType=CHAR},
+		#{specDiscLvl,jdbcType=CHAR}, #{recSt,jdbcType=CHAR},
+		#{comments,jdbcType=VARCHAR},
+		#{recCrtTs,jdbcType=TIMESTAMP},
+		#{recUpdTs,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfig">
+		insert into ARGS.TBL_ARGS_REASON_CONF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reasonTp != null">
+				REASON_TP,
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP,
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP,
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL,
+			</if>
+			<if test="recSt != null">
+				REC_ST,
+			</if>
+			<if test="comments != null">
+				COMMENTS,
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS,
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reasonTp != null">
+				#{reasonTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				#{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				#{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				#{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="recSt != null">
+				#{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				#{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				#{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				#{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfig">
+		update ARGS.TBL_ARGS_REASON_CONF
+		<set>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where REASON_TP = #{reasonTp,jdbcType=CHAR}
+		and MCHNT_TP =
+		#{mchntTp,jdbcType=CHAR}
+		and SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR}
+		and SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.ReasonConfig">
+		update ARGS.TBL_ARGS_REASON_CONF
+		set REC_ST =
+		#{recSt,jdbcType=CHAR},
+		COMMENTS = #{comments,jdbcType=VARCHAR},
+		REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+		REC_UPD_TS =
+		#{recUpdTs,jdbcType=TIMESTAMP}
+		where REASON_TP =
+		#{reasonTp,jdbcType=CHAR}
+		and MCHNT_TP = #{mchntTp,jdbcType=CHAR}
+		and
+		SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR}
+		and SPEC_DISC_LVL =
+		#{specDiscLvl,jdbcType=CHAR}
+	</update>
+	<select id="selectAllConfig" resultMap="BaseResultMap">
+		select * from
+		args.tbl_args_reason_conf
+		where rec_st='0'
+	</select>
+</mapper>

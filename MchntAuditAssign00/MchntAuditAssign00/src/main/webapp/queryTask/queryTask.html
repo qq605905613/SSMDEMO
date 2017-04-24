@@ -1,0 +1,185 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="queryTask.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="queryTaskApp" ng-controller="queryTaskCtrl">
+<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li><a href="/MchntAudit/operation/queryOpera.html">operation查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+						<li><a href="/MchntAudit/user/usercurd.html">人员管理</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="width: 81%; height: 600px; overflow: auto">
+		<input type="text" placeholder="请输入商户代码" ng-model="mchnt"
+			style="margin-left: 2%; float: left; height: 5%" /> <img
+			src="/MchntAudit/image/search.png" ng-click="queryTaskByMchnt()"
+			style="cursor: pointer; height: 5%; float: left; margin-left: 1%" />
+		<table style="color: white; font-size: 1vw; width: 100%"
+			cellspacing="20">
+			<tr>
+				<td>商户代码</td>
+				<td style="width: 5%"></td>
+				<td>接入方式</td>
+				<td>价格类型</td>
+				<td>商户类型</td>
+				<td>审核状态</td>
+				<td>任务结果</td>
+				<td>是否非标</td>
+				<td>完成时间</td>
+				<td style="width: 10%"></td>
+			</tr>
+			<tr ng-repeat="task in taskLists">
+				<td>{{task.mchntCd}}</td>
+				<td><img src="/MchntAudit/image/timg.jpg"
+					style="cursor: pointer; width: 25%"
+					ng-mouseenter="showDetail(task.taskId)"
+					ng-mouseleave="hideDetail()" ng-show="task.isWhiteMchnt=='1'" /></td>
+				<td>{{task.connMd|filterConnMd}}</td>
+				<td>{{task.mchntTp|filterPriceTp:task.specDiscTp:task.specDiscLvl}}</td>
+				<td>{{task.mchntTp}}</td>
+				<td>{{task.auditSt|filterAuditSt}}</td>
+				<td>{{task.taskResult|filterTask}}</td>
+				<td>{{task.isWhiteMchnt|filterWhiteMchnt}}</td>
+				<td>{{task.actualDoneTs|date:"yyyy-MM-dd HH:mm"}}</td>
+				<td ng-show="{{task.taskResult}}=='4'" id="dealPd"><button
+						type="submit" ng-mouseenter="pendingBtn = true"
+						ng-mouseleave="pendingBtn = false">继续处理</button>
+					<button type="submit" ng-mouseenter="pendingBtn = true"
+						ng-mouseleave="pendingBtn = false" ng-click="passPop(task.taskId)"
+						ng-show="pendingBtn">审批通过</button>
+					<button type="submit" ng-mouseenter="pendingBtn = true"
+						ng-mouseleave="pendingBtn = false"
+						ng-click="rejectPop(task.taskId,task.mchntTp,task.specDiscTp,task.specDiscLvl)"
+						ng-show="pendingBtn">审批拒绝</button></td>
+			</tr>
+		</table>
+	</div>
+	<div
+		style="color: white; margin-left: 9%; margin-top: 2%; font-size: 1vw">
+		<div>
+			<span>当前页：第{{startPage}}页</span> <span>总页数：{{totalPage}}页</span> <span>总条数：{{totalCount}}</span>
+			<a href="" ng-click="lastPage()"
+				style="margin-left: 320px; color: white">上一页</a> <a href=""
+				ng-click="nextPage()" style="color: white">下一页</a>
+		</div>
+		<div style="padding-top: 20px">
+			<span>每页显示：</span> <select ng-model="pageSize"
+				ng-options="size for size in psModel" style="">
+				<option>10</option>
+			</select> <span>快速跳转：</span> <input type="tel" ng-model="startPage"
+				style="width: 50px" /> <span>审核状态：</span> <select ng-model="type"
+				ng-options="tp.value for tp in tpModel" style="">
+				<option>请选择</option>
+			</select> <span>审核类型：</span> <select ng-model="auditSt"
+				ng-options="auditS.value for auditS in stModel" style="">
+				<option>请选择</option>
+			</select> <span>日期查询：</span> <select ng-model="dateChoose"
+				ng-options="dc.value for dc in dateModel" style="">
+				<option>请选择</option>
+			</select> <span>是否非标：</span> <select ng-model="isWhiteMht"
+				ng-options="iwm.value for iwm in isWhiteModel" style="">
+				<option>请选择</option>
+			</select>
+
+			<button type="submit" ng-click="query()"
+				style="margin-left: 10%; height: 35px; width: 70px">查询</button>
+		</div>
+	</div>
+	<div ng-if="passBox" class="popUpBox">
+		<img src="/MchntAudit/image/close.jpg"
+			style="height: 8%; width: 5%; float: right; cursor: pointer"
+			ng-click="closePass()"></img>
+		<div class="text-area">
+			<textarea placeholder="请输入数字6-10" id="rating" maxlength=2
+				required="required"></textarea>
+		</div>
+		<div class="btn-confirm">
+			<button type="submit" ng-click="pass()">确定</button>
+			<button type="submit" ng-click="closePass()"
+				style="margin-left: 40px">取消</button>
+		</div>
+	</div>
+	<div ng-if="rejectBox" class="popUpBox"
+	style="left: 8%; top: 10%; height: 80%; width: 90%">
+		<img src="/MchntAudit/image/close.jpg"
+			style="height: 5%; width: 3%; float: right; cursor: pointer"
+			ng-click="closeReject()"></img>
+		<div class="text-area">
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_a">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_b">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_c">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_d">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_e">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_f">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<div style="clear:left" align="center">
+			<textarea id="rejectReason" placeholder="其他原因"
+				style="width: 430px; height: 200px"></textarea>
+			</div>
+		</div>
+		<div class="btn-confirm">
+			<button type="submit" ng-click="reject()">确定</button>
+			<button type="submit" ng-click="closeReject()"
+				style="margin-left: 40px">取消</button>
+		</div>
+	</div>
+	<div id="detailBox" class="popDetailBox" style="font-family: 楷体;">
+		<p>{{detailType|filterDetailType}}{{detailReason}}</p>
+	</div>
+</body>
+</html>

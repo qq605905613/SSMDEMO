@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.AuditUserMapper">
+	<resultMap id="BaseResultMap"
+		type="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		<id column="USR_ID" property="usrId" jdbcType="INTEGER" />
+		<result column="USR_CD" property="usrCd" jdbcType="VARCHAR" />
+		<result column="USR_NM" property="usrNm" jdbcType="VARCHAR" />
+		<result column="LOGIN_PWD" property="loginPwd" jdbcType="CHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="FLG_BA" property="flgBa" jdbcType="CHAR" />
+		<result column="FLG_1ST" property="flg1st" jdbcType="CHAR" />
+		<result column="REC_ST" property="recSt" jdbcType="CHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="REC_CRT_TS" property="recCrtTs" jdbcType="TIMESTAMP" />
+		<result column="REC_UPD_TS" property="recUpdTs" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		USR_ID, USR_CD, USR_NM, LOGIN_PWD, GROUP_ID, FLG_BA, FLG_1ST, REC_ST,
+		COMMENTS, REC_CRT_TS,
+		REC_UPD_TS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_AUDIT_USER
+		where USR_ID = #{usrId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from MMGM.TBL_MMGM_AUDIT_USER
+		where USR_ID = #{usrId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		insert into MMGM.TBL_MMGM_AUDIT_USER (USR_ID, USR_CD, USR_NM,
+		LOGIN_PWD, GROUP_ID, FLG_BA,
+		FLG_1ST, REC_ST, COMMENTS,
+		REC_CRT_TS, REC_UPD_TS)
+		values (#{usrId,jdbcType=INTEGER}, #{usrCd,jdbcType=VARCHAR},
+		#{usrNm,jdbcType=VARCHAR},
+		#{loginPwd,jdbcType=CHAR}, #{groupId,jdbcType=VARCHAR}, #{flgBa,jdbcType=CHAR},
+		#{flg1st,jdbcType=CHAR}, #{recSt,jdbcType=CHAR},
+		#{comments,jdbcType=VARCHAR},
+		#{recCrtTs,jdbcType=TIMESTAMP}, #{recUpdTs,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		insert into MMGM.TBL_MMGM_AUDIT_USER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usrId != null">
+				USR_ID,
+			</if>
+			<if test="usrCd != null">
+				USR_CD,
+			</if>
+			<if test="usrNm != null">
+				USR_NM,
+			</if>
+			<if test="loginPwd != null">
+				LOGIN_PWD,
+			</if>
+			<if test="groupId != null">
+				GROUP_ID,
+			</if>
+			<if test="flgBa != null">
+				FLG_BA,
+			</if>
+			<if test="flg1st != null">
+				FLG_1ST,
+			</if>
+			<if test="recSt != null">
+				REC_ST,
+			</if>
+			<if test="comments != null">
+				COMMENTS,
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS,
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="usrId != null">
+				#{usrId,jdbcType=INTEGER},
+			</if>
+			<if test="usrCd != null">
+				#{usrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="usrNm != null">
+				#{usrNm,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPwd != null">
+				#{loginPwd,jdbcType=CHAR},
+			</if>
+			<if test="groupId != null">
+				#{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="flgBa != null">
+				#{flgBa,jdbcType=CHAR},
+			</if>
+			<if test="flg1st != null">
+				#{flg1st,jdbcType=CHAR},
+			</if>
+			<if test="recSt != null">
+				#{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				#{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				#{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				#{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		update MMGM.TBL_MMGM_AUDIT_USER
+		<set>
+			<if test="usrCd != null">
+				USR_CD = #{usrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="usrNm != null">
+				USR_NM = #{usrNm,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPwd != null">
+				LOGIN_PWD = #{loginPwd,jdbcType=CHAR},
+			</if>
+			<if test="groupId != null">
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="flgBa != null">
+				FLG_BA = #{flgBa,jdbcType=CHAR},
+			</if>
+			<if test="flg1st != null">
+				FLG_1ST = #{flg1st,jdbcType=CHAR},
+			</if>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where USR_ID = #{usrId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		update MMGM.TBL_MMGM_AUDIT_USER
+		set USR_CD = #{usrCd,jdbcType=VARCHAR},
+		USR_NM = #{usrNm,jdbcType=VARCHAR},
+		LOGIN_PWD = #{loginPwd,jdbcType=CHAR},
+		GROUP_ID = #{groupId,jdbcType=VARCHAR},
+		FLG_BA = #{flgBa,jdbcType=CHAR},
+		FLG_1ST = #{flg1st,jdbcType=CHAR},
+		REC_ST = #{recSt,jdbcType=CHAR},
+		COMMENTS = #{comments,jdbcType=VARCHAR},
+		REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+		REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP}
+		where USR_ID = #{usrId,jdbcType=INTEGER}
+	</update>
+	<select id="loginAuth" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_AUDIT_USER where USR_CD=#{0}
+		and
+		LOGIN_PWD=#{1}
+	</select>
+	<select id="selectAlluser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+	from MMGM.TBL_MMGM_AUDIT_USER where <![CDATA[ USR_ID <'88' order by GROUP_ID]]>
+	
+	</select>
+	<update id="updateFla" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditUser">
+		update  MMGM.TBL_MMGM_AUDIT_USER 	
+		
+		set FLG_BA = #{1} where   USR_ID = #{0}
+	</update>
+	<select id="selectAllusera" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+	from MMGM.TBL_MMGM_AUDIT_USER >
+	
+	</select>
+</mapper>

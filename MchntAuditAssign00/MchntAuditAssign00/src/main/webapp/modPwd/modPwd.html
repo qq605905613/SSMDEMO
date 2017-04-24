@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="modPwd.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="modPwdApp" ng-controller="modPwdCtrl">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li><a href="/MchntAudit/operation/queryOpera.html">operation查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+						<li><a href="/MchntAudit/user/usercurd.html">人员管理</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="login" style="top:30%;margin-top:0px">
+		<input type="password" placeholder="旧密码" required="required"
+			ng-model="oldPwd" /> <input type="password" placeholder="新密码"
+			required="required" ng-model="newPwd1" /> <input type="password"
+			placeholder="确认密码" required="required" ng-model="newPwd2" />
+		<button type="submit" class="btn btn-primary btn-block btn-large"
+			ng-click="modifyPwd()">确认修改</button>
+			
+	
+	</div>
+			<div  ng-if="comments=='1'" style="margin-top: 100px;">
+	<button type="submit" class="btn btn-primary btn-block btn-large" ng-click="getAll()">查看技能</button>
+			<table class="" style="color: white;">
+				<tr style="width: 280px;">
+					<td style="width: 70px;">序号</td>				
+					<td style="width: 80px;">姓名</td>
+					<td style="width: 70px;">技能状态</td>
+					<td style="width: 70px;">sy</td>
+					<td style="width: 70px;">11</td>
+				</tr>
+				<tr  style="width: 70px;" ng-repeat="info in user">
+				<td style="width: 70px;">{{info.usrId}}</td>
+				<td style="width: 70px;">{{info.usrNm}}</td>
+				<td style="width: 70px;">{{info.flgBa}}</td>
+				<td style="width: 70px;"><input type="text"  style="width: 70px;"  ng-model="flgBa"></td>
+			
+
+				<td style="width: 70px;"><button type="submit" class="" ng-click="setFla(info.usrId,flgBa)">更改</button><td>
+				
+				</tr>
+			
+			
+			</table>
+	</div>
+</body>
+</html>

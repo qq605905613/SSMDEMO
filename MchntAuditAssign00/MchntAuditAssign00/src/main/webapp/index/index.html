@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="index.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="indexApp" ng-controller="indexCtrl">
+<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li><a href="/MchntAudit/operation/queryOpera.html">operation查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+						<li><a href="/MchntAudit/user/usercurd.html">人员管理</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="color: white">
+		<h1 align="center">Welcome,{{usrNm}}</h1>
+	</div>
+	<div style="color: white">
+		<h3 style="margin:5% 0 0 10%">今日已通过：{{psNum}}单,已拒绝：{{rjNum}}单,已挂起：{{pdNum}}单,在审中：{{onNum}}单,总单数：{{psNum+rjNum+pdNum+onNum}}单</h3>
+	</div>
+</body>
+</html>

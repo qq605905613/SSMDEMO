@@ -1,0 +1,34 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="usercurd.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="userapp" ng-controller="userctr">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+
+<div style=""> <button type="submit" ng-click=showall()>添加用户</button></div>
+
+
+<div ng-if ="showdiv">
+	<span>test</span>
+
+</div>
+	</body>
+</html>

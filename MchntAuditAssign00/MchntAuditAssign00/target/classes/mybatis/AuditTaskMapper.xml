@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.AuditTaskMapper">
+	<resultMap id="BaseResultMap"
+		type="com.unionpay.opdept.mchntaudit.orm.bean.AuditTask">
+		<id column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+		<result column="TASK_TP" jdbcType="CHAR" property="taskTp" />
+		<result column="TASK_PRI" jdbcType="BIGINT" property="taskPri" />
+		<result column="TASK_COMMIT_TS" jdbcType="TIMESTAMP" property="taskCommitTs" />
+		<result column="TASK_COMMIT_USR" jdbcType="VARCHAR" property="taskCommitUsr" />
+		<result column="TASK_ST" jdbcType="CHAR" property="taskSt" />
+		<result column="TASK_RESULT" jdbcType="CHAR" property="taskResult" />
+		<result column="TASK_PLAN_USR" jdbcType="VARCHAR" property="taskPlanUsr" />
+		<result column="TASK_EXEC_USR" jdbcType="VARCHAR" property="taskExecUsr" />
+		<result column="TASK_ASSIGN_TS" jdbcType="TIMESTAMP" property="taskAssignTs" />
+		<result column="TASK_PLAN_DONE_TS" jdbcType="TIMESTAMP"
+			property="taskPlanDoneTs" />
+		<result column="TASK_EXEC_DONE_TS" jdbcType="TIMESTAMP"
+			property="taskExecDoneTs" />
+		<result column="MCHNT_SRV_TP" jdbcType="CHAR" property="mchntSrvTp" />
+		<result column="MCHNT_CD" jdbcType="CHAR" property="mchntCd" />
+		<result column="MCHNT_CN_NM" jdbcType="VARCHAR" property="mchntCnNm" />
+		<result column="ACQ_INS_ID_CD" jdbcType="VARCHAR" property="acqInsIdCd" />
+		<result column="ACPT_INS_ID_CD" jdbcType="VARCHAR" property="acptInsIdCd" />
+		<result column="CUP_BRANCH_INS_ID_CD" jdbcType="VARCHAR"
+			property="cupBranchInsIdCd" />
+		<result column="CONN_MD" jdbcType="CHAR" property="connMd" />
+		<result column="MCHNT_TP" jdbcType="CHAR" property="mchntTp" />
+		<result column="SPEC_DISC_TP" jdbcType="CHAR" property="specDiscTp" />
+		<result column="SPEC_DISC_LVL" jdbcType="CHAR" property="specDiscLvl" />
+		<result column="IS_WHITE_MCHNT" jdbcType="CHAR" property="isWhiteMchnt" />
+		<result column="ACQ_COMMIT_AUDIT_TS" jdbcType="TIMESTAMP"
+			property="acqCommitAuditTs" />
+		<result column="AUDIT_ST" jdbcType="CHAR" property="auditSt" />
+		<result column="ACQ_PRI" jdbcType="CHAR" property="acqPri" />
+		<result column="AUDIT_TP_PRI" jdbcType="CHAR" property="auditTpPri" />
+		<result column="AVOID_USR" jdbcType="VARCHAR" property="avoidUsr" />
+		<result column="COMMISSION_TP" jdbcType="CHAR" property="commissionTp" />
+		<result column="MCHNT_AUDIT_ID" jdbcType="CHAR" property="mchntAuditId" />
+		<result column="REC_CRT_TS" jdbcType="TIMESTAMP" property="recCrtTs" />
+		<result column="REC_UPD_TS" jdbcType="TIMESTAMP" property="recUpdTs" />
+		<result column="EXPORT_TS" jdbcType="TIMESTAMP" property="exportTs" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TASK_ID, TASK_TP, TASK_PRI, TASK_COMMIT_TS,
+		TASK_COMMIT_USR, TASK_ST,
+		TASK_RESULT,
+		TASK_PLAN_USR, TASK_EXEC_USR,
+		TASK_ASSIGN_TS, TASK_PLAN_DONE_TS, TASK_EXEC_DONE_TS,
+		MCHNT_SRV_TP,
+		MCHNT_CD, MCHNT_CN_NM, ACQ_INS_ID_CD, ACPT_INS_ID_CD,
+		CUP_BRANCH_INS_ID_CD,
+		CONN_MD, MCHNT_TP, SPEC_DISC_TP, SPEC_DISC_LVL,
+		IS_WHITE_MCHNT,
+		ACQ_COMMIT_AUDIT_TS,
+		AUDIT_ST, ACQ_PRI, AUDIT_TP_PRI,COMMISSION_TP,
+		AVOID_USR, MCHNT_AUDIT_ID, REC_CRT_TS,
+		REC_UPD_TS,EXPORT_TS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where TASK_ID =
+		#{taskId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		MMGM.TBL_MMGM_AUDIT_TASK
+		where TASK_ID = #{taskId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditTask">
+		insert into
+		MMGM.TBL_MMGM_AUDIT_TASK (TASK_ID, TASK_TP, TASK_PRI,
+		TASK_COMMIT_TS,
+		TASK_COMMIT_USR, TASK_ST,
+		TASK_RESULT, TASK_PLAN_USR, TASK_EXEC_USR,
+		TASK_ASSIGN_TS, TASK_PLAN_DONE_TS, TASK_EXEC_DONE_TS,
+		MCHNT_SRV_TP,
+		MCHNT_CD, MCHNT_CN_NM,
+		ACQ_INS_ID_CD, ACPT_INS_ID_CD,
+		CUP_BRANCH_INS_ID_CD,
+		CONN_MD, MCHNT_TP, SPEC_DISC_TP,
+		SPEC_DISC_LVL,
+		IS_WHITE_MCHNT, ACQ_COMMIT_AUDIT_TS,
+		AUDIT_ST, ACQ_PRI, AUDIT_TP_PRI,COMMISSION_TP,
+		AVOID_USR, MCHNT_AUDIT_ID, REC_CRT_TS,
+		REC_UPD_TS,EXPORT_TS)
+		values
+		(#{taskId,jdbcType=VARCHAR}, #{taskTp,jdbcType=CHAR},
+		#{taskPri,jdbcType=BIGINT},
+		#{taskCommitTs,jdbcType=TIMESTAMP},
+		#{taskCommitUsr,jdbcType=VARCHAR}, #{taskSt,jdbcType=CHAR},
+		#{taskResult,jdbcType=CHAR}, #{taskPlanUsr,jdbcType=VARCHAR},
+		#{taskExecUsr,jdbcType=VARCHAR},
+		#{taskAssignTs,jdbcType=TIMESTAMP},
+		#{taskPlanDoneTs,jdbcType=TIMESTAMP},
+		#{taskExecDoneTs,jdbcType=TIMESTAMP},
+		#{mchntSrvTp,jdbcType=CHAR},
+		#{mchntCd,jdbcType=CHAR}, #{mchntCnNm,jdbcType=VARCHAR},
+		#{acqInsIdCd,jdbcType=VARCHAR}, #{acptInsIdCd,jdbcType=VARCHAR},
+		#{cupBranchInsIdCd,jdbcType=VARCHAR},
+		#{connMd,jdbcType=CHAR},
+		#{mchntTp,jdbcType=CHAR}, #{specDiscTp,jdbcType=CHAR},
+		#{specDiscLvl,jdbcType=CHAR}, #{isWhiteMchnt,jdbcType=CHAR},
+		#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+		#{auditSt,jdbcType=CHAR},
+		#{acqPri,jdbcType=CHAR}, #{auditTpPri,jdbcType=CHAR},
+		#{avoidUsr,jdbcType=VARCHAR}, #{mchntAuditId,jdbcType=CHAR},
+		#{commissionTp,jdbcType=CHAR},
+		#{recCrtTs,jdbcType=TIMESTAMP},
+		#{recUpdTs,jdbcType=TIMESTAMP},
+		#{exportTs,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditTask">
+		insert into MMGM.TBL_MMGM_AUDIT_TASK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				TASK_ID,
+			</if>
+			<if test="taskTp != null">
+				TASK_TP,
+			</if>
+			<if test="taskPri != null">
+				TASK_PRI,
+			</if>
+			<if test="taskCommitTs != null">
+				TASK_COMMIT_TS,
+			</if>
+			<if test="taskCommitUsr != null">
+				TASK_COMMIT_USR,
+			</if>
+			<if test="taskSt != null">
+				TASK_ST,
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT,
+			</if>
+			<if test="taskPlanUsr != null">
+				TASK_PLAN_USR,
+			</if>
+			<if test="taskExecUsr != null">
+				TASK_EXEC_USR,
+			</if>
+			<if test="taskAssignTs != null">
+				TASK_ASSIGN_TS,
+			</if>
+			<if test="taskPlanDoneTs != null">
+				TASK_PLAN_DONE_TS,
+			</if>
+			<if test="taskExecDoneTs != null">
+				TASK_EXEC_DONE_TS,
+			</if>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP,
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD,
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM,
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD,
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD,
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD,
+			</if>
+			<if test="connMd != null">
+				CONN_MD,
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP,
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP,
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL,
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT,
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS,
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST,
+			</if>
+			<if test="acqPri != null">
+				ACQ_PRI,
+			</if>
+			<if test="auditTpPri != null">
+				AUDIT_TP_PRI,
+			</if>
+			<if test="commissionTp != null">
+			    COMMISSION_TP,
+			</if>
+			<if test="avoidUsr != null">
+				AVOID_USR,
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID,
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS,
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS,
+			</if>
+			<if test="exportTs != null">
+			    EXPORT_TS
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				#{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskTp != null">
+				#{taskTp,jdbcType=CHAR},
+			</if>
+			<if test="taskPri != null">
+				#{taskPri,jdbcType=BIGINT},
+			</if>
+			<if test="taskCommitTs != null">
+				#{taskCommitTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskCommitUsr != null">
+				#{taskCommitUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskSt != null">
+				#{taskSt,jdbcType=CHAR},
+			</if>
+			<if test="taskResult != null">
+				#{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="taskPlanUsr != null">
+				#{taskPlanUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskExecUsr != null">
+				#{taskExecUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskAssignTs != null">
+				#{taskAssignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskPlanDoneTs != null">
+				#{taskPlanDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskExecDoneTs != null">
+				#{taskExecDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mchntSrvTp != null">
+				#{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				#{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				#{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				#{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				#{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				#{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				#{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				#{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				#{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				#{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				#{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="acqPri != null">
+				#{acqPri,jdbcType=CHAR},
+			</if>
+			<if test="auditTpPri != null">
+				#{auditTpPri,jdbcType=CHAR},
+			</if>
+			<if test="commissionTp != null">
+			    #{commissionTp,jdbcType=CHAR},
+			</if>
+			<if test="avoidUsr != null">
+				#{avoidUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				#{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="recCrtTs != null">
+				#{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				#{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="exportTs != null">
+			    #{exportTs,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditTask">
+		update MMGM.TBL_MMGM_AUDIT_TASK
+		<set>
+			<if test="taskTp != null">
+				TASK_TP = #{taskTp,jdbcType=CHAR},
+			</if>
+			<if test="taskPri != null">
+				TASK_PRI = #{taskPri,jdbcType=BIGINT},
+			</if>
+			<if test="taskCommitTs != null">
+				TASK_COMMIT_TS = #{taskCommitTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskCommitUsr != null">
+				TASK_COMMIT_USR = #{taskCommitUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskSt != null">
+				TASK_ST = #{taskSt,jdbcType=CHAR},
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT = #{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="taskPlanUsr != null">
+				TASK_PLAN_USR = #{taskPlanUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskExecUsr != null">
+				TASK_EXEC_USR = #{taskExecUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="taskAssignTs != null">
+				TASK_ASSIGN_TS = #{taskAssignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskPlanDoneTs != null">
+				TASK_PLAN_DONE_TS = #{taskPlanDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskExecDoneTs != null">
+				TASK_EXEC_DONE_TS = #{taskExecDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP = #{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD = #{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD = #{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD =
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				CONN_MD = #{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT = #{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS =
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST = #{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="acqPri != null">
+				ACQ_PRI = #{acqPri,jdbcType=CHAR},
+			</if>
+			<if test="auditTpPri != null">
+				AUDIT_TP_PRI = #{auditTpPri,jdbcType=CHAR},
+			</if>
+			<if test="commissionTp != null">
+			    COMMISSION_TP = #{commissionTp,jdbcType=CHAR},
+			</if>
+			<if test="avoidUsr != null">
+				AVOID_USR = #{avoidUsr,jdbcType=VARCHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID = #{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="exportTs != null">
+			    EXPORT_TS = #{exportTs,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where TASK_ID = #{taskId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.AuditTask">
+		update
+		MMGM.TBL_MMGM_AUDIT_TASK
+		set TASK_TP = #{taskTp,jdbcType=CHAR},
+		TASK_PRI = #{taskPri,jdbcType=BIGINT},
+		TASK_COMMIT_TS =
+		#{taskCommitTs,jdbcType=TIMESTAMP},
+		TASK_COMMIT_USR =
+		#{taskCommitUsr,jdbcType=VARCHAR},
+		TASK_ST = #{taskSt,jdbcType=CHAR},
+		TASK_RESULT = #{taskResult,jdbcType=CHAR},
+		TASK_PLAN_USR =
+		#{taskPlanUsr,jdbcType=VARCHAR},
+		TASK_EXEC_USR =
+		#{taskExecUsr,jdbcType=VARCHAR},
+		TASK_ASSIGN_TS =
+		#{taskAssignTs,jdbcType=TIMESTAMP},
+		TASK_PLAN_DONE_TS =
+		#{taskPlanDoneTs,jdbcType=TIMESTAMP},
+		TASK_EXEC_DONE_TS =
+		#{taskExecDoneTs,jdbcType=TIMESTAMP},
+		MCHNT_SRV_TP =
+		#{mchntSrvTp,jdbcType=CHAR},
+		MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+		MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+		ACQ_INS_ID_CD =
+		#{acqInsIdCd,jdbcType=VARCHAR},
+		ACPT_INS_ID_CD =
+		#{acptInsIdCd,jdbcType=VARCHAR},
+		CUP_BRANCH_INS_ID_CD =
+		#{cupBranchInsIdCd,jdbcType=VARCHAR},
+		CONN_MD =
+		#{connMd,jdbcType=CHAR},
+		MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+		SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+		SPEC_DISC_LVL =
+		#{specDiscLvl,jdbcType=CHAR},
+		IS_WHITE_MCHNT =
+		#{isWhiteMchnt,jdbcType=CHAR},
+		ACQ_COMMIT_AUDIT_TS =
+		#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+		AUDIT_ST =
+		#{auditSt,jdbcType=CHAR},
+		ACQ_PRI = #{acqPri,jdbcType=CHAR},
+		AUDIT_TP_PRI = #{auditTpPri,jdbcType=CHAR},
+		COMMISSION_TP = #{commissionTp,jdbcType=CHAR},
+		AVOID_USR =
+		#{avoidUsr,jdbcType=VARCHAR},
+		MCHNT_AUDIT_ID =
+		#{mchntAuditId,jdbcType=CHAR},
+		REC_CRT_TS =
+		#{recCrtTs,jdbcType=TIMESTAMP},
+		REC_UPD_TS =
+		#{recUpdTs,jdbcType=TIMESTAMP},
+		EXPORT_TS = 
+		#{exportTs,jdbcType=TIMESTAMP}
+		where TASK_ID =
+		#{taskId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectBranchTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_tp = 'BA'
+		and task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1'
+		and cup_branch_ins_id_cd in
+		('0800010000','0800019800')
+		)
+		where row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectHeadTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_tp = 'HA' and task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1' and audit_st='F'
+		)
+		where row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectSaTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_tp = 'HA' and task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1'
+		and
+		audit_st='G'
+		)
+		where row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectSpecialGoverTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1'
+		 and (audit_st in ('F','G') or (audit_st = '4' and cup_branch_ins_id_cd in ('0800010000','0800019800')))
+        and (
+            -- 政府服务类
+            mchnt_tp in ('8651','9211','9222','9223','9311','9399')
+            -- 重点机构
+            or acq_ins_id_cd in ('0848490000','0848570000','0848360000','0848190000','0848260000','0848870000'
+                ,'0848230000','0848270000','0848330000','0848410000','0848120000','0848640000')
+            -- 浙江地区所有非金机构
+            or (
+                cup_branch_ins_id_cd = '0800013310'
+                and acq_ins_id_cd in (select ins_id_cd from dicdat.tbl_dicdat_ins_cata where ins_cata_3rd_id in (24,25))
+            )
+        )
+		)
+		where row_num
+		&lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectSpecialOtherTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_st != '0' and task_result = '1'
+		and
+		 is_white_mchnt = '1'
+        -- 总公司审核或0000、9800分公司审核
+        and (audit_st in ('F','G') or (audit_st = '4' and cup_branch_ins_id_cd in ('0800010000','0800019800')))
+        -- 除政府服务类以外的特殊计费
+        and commission_tp = 'M3' and (spec_disc_tp in ('02','03') or (spec_disc_tp = '01' and spec_disc_lvl = '1'))
+        and mchnt_tp not in ('8651','9211','9222','9223','9311','9399')
+		)
+		where
+		row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectReduceTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1' 
+        -- 总公司审核或0000、9800分公司审核
+        and (audit_st in ('F','G') or (audit_st = '4' and cup_branch_ins_id_cd in ('0800010000','0800019800')))
+        -- 减免类
+        and commission_tp = 'M4' and mchnt_tp in ('8062','8011','8021','8031','8041','8042','8049'
+                ,'8099','8211','8220','8351','8241','8398')
+		)
+		where row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+
+	<select id="selectDiscountTaskList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_st != '0' and task_result = '1'
+		and
+		 is_white_mchnt = '1'
+        -- 总公司审核或0000、9800分公司审核
+        and (audit_st in ('F','G') or (audit_st = '4' and cup_branch_ins_id_cd in ('0800010000','0800019800')))
+        -- 其它
+        and commission_tp = 'M5'
+		)
+		where row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+	<select id="selectStockBaTaskList" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts desc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_result = '1'
+		and
+		is_white_mchnt = '0' and task_st!='0' and
+		audit_st
+		= '4' and
+		cup_branch_ins_id_cd in ('0800010000','0800019800') and
+		mchnt_srv_tp not in ('03','11','13')
+		and task_commit_ts &gt;=
+		'20160517000000')
+		where row_num
+		&lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by
+		row_num
+	</select>
+	<select id="selectStockHsaTaskList" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts desc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_result = '1'
+		and
+		is_white_mchnt = '0' and task_st!='0' and
+		audit_st
+		in ('F','G') and mchnt_srv_tp not in ('03','11','13')
+		and
+		task_commit_ts &gt;= '20160517000000')
+		where row_num
+		&lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	</select>
+
+	<select id="selectRestTask" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from MMGM.TBL_MMGM_AUDIT_TASK where task_st!='0' and
+		task_result='1'
+		<if test="isWhiteMchnt!=null">
+			and is_white_mchnt=#{isWhiteMchnt,jdbcType=CHAR}
+		</if>
+		and (audit_st in ('F','G') or (audit_st = '4' and
+		cup_branch_ins_id_cd
+		in ('0800010000','0800019800')))
+		and mchnt_srv_tp not in
+		('03','11','13') and task_commit_ts &gt;= '20160517000000'
+	</select>
+	<select id="selectNewBranchlist" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+			select
+		<include refid="Base_Column_List" />
+		from (
+		select
+		<include refid="Base_Column_List" />
+		,rownumber() over(
+		order by task_tp asc
+		,acq_pri asc
+		,audit_tp_pri desc
+		,task_commit_ts asc
+		) as row_num
+		from MMGM.TBL_MMGM_AUDIT_TASK
+		where
+		task_st != '0' and task_result = '1'
+		and
+		is_white_mchnt = '1' 
+        -- 总公司审核或0000、9800分公司审核
+        and (audit_st in ('F','G') or (audit_st = '4' and cup_branch_ins_id_cd in ('0800010000','0800019800')))
+        -- 批量现场注册
+        and commission_tp = 'M2' and mchnt_cd in (select mchnt_cd from mmgm.tbl_mmgm_batch_mchnt_info)
+		)
+		where
+		row_num &lt;=
+		#{rowNum,jdbcType=INTEGER}
+		order by row_num
+	
+	</select>
+	
+</mapper>

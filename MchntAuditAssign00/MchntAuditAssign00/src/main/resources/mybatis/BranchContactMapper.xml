@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.BranchContactMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.opdept.mchntaudit.orm.bean.BranchContact" >
+    <id column="CONTACT_ID" property="contactId" jdbcType="INTEGER" />
+    <result column="USED_FOR" property="usedFor" jdbcType="VARCHAR" />
+    <result column="BRANCH_CD" property="branchCd" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TEL_NO" property="telNo" jdbcType="VARCHAR" />
+    <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="SEND_TP" property="sendTp" jdbcType="CHAR" />
+    <result column="PRI_SEQ" property="priSeq" jdbcType="INTEGER" />
+    <result column="REC_CRT_TS" property="recCrtTs" jdbcType="TIMESTAMP" />
+    <result column="REC_UPD_TS" property="recUpdTs" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CONTACT_ID, USED_FOR, BRANCH_CD, EMAIL, NAME, TEL_NO, PHONE_NO, SEND_TP, PRI_SEQ, 
+    REC_CRT_TS, REC_UPD_TS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ARGS.TBL_ARGS_BRANCH_CONTACT
+    where CONTACT_ID = #{contactId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ARGS.TBL_ARGS_BRANCH_CONTACT
+    where CONTACT_ID = #{contactId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.BranchContact" >
+    insert into ARGS.TBL_ARGS_BRANCH_CONTACT (CONTACT_ID, USED_FOR, BRANCH_CD, 
+      EMAIL, NAME, TEL_NO, 
+      PHONE_NO, SEND_TP, PRI_SEQ, 
+      REC_CRT_TS, REC_UPD_TS)
+    values (#{contactId,jdbcType=INTEGER}, #{usedFor,jdbcType=VARCHAR}, #{branchCd,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{telNo,jdbcType=VARCHAR}, 
+      #{phoneNo,jdbcType=VARCHAR}, #{sendTp,jdbcType=CHAR}, #{priSeq,jdbcType=INTEGER}, 
+      #{recCrtTs,jdbcType=TIMESTAMP}, #{recUpdTs,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.BranchContact" >
+    insert into ARGS.TBL_ARGS_BRANCH_CONTACT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        CONTACT_ID,
+      </if>
+      <if test="usedFor != null" >
+        USED_FOR,
+      </if>
+      <if test="branchCd != null" >
+        BRANCH_CD,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="telNo != null" >
+        TEL_NO,
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO,
+      </if>
+      <if test="sendTp != null" >
+        SEND_TP,
+      </if>
+      <if test="priSeq != null" >
+        PRI_SEQ,
+      </if>
+      <if test="recCrtTs != null" >
+        REC_CRT_TS,
+      </if>
+      <if test="recUpdTs != null" >
+        REC_UPD_TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="usedFor != null" >
+        #{usedFor,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCd != null" >
+        #{branchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null" >
+        #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTp != null" >
+        #{sendTp,jdbcType=CHAR},
+      </if>
+      <if test="priSeq != null" >
+        #{priSeq,jdbcType=INTEGER},
+      </if>
+      <if test="recCrtTs != null" >
+        #{recCrtTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdTs != null" >
+        #{recUpdTs,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.BranchContact" >
+    update ARGS.TBL_ARGS_BRANCH_CONTACT
+    <set >
+      <if test="usedFor != null" >
+        USED_FOR = #{usedFor,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCd != null" >
+        BRANCH_CD = #{branchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null" >
+        TEL_NO = #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTp != null" >
+        SEND_TP = #{sendTp,jdbcType=CHAR},
+      </if>
+      <if test="priSeq != null" >
+        PRI_SEQ = #{priSeq,jdbcType=INTEGER},
+      </if>
+      <if test="recCrtTs != null" >
+        REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdTs != null" >
+        REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CONTACT_ID = #{contactId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.BranchContact" >
+    update ARGS.TBL_ARGS_BRANCH_CONTACT
+    set USED_FOR = #{usedFor,jdbcType=VARCHAR},
+      BRANCH_CD = #{branchCd,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      TEL_NO = #{telNo,jdbcType=VARCHAR},
+      PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      SEND_TP = #{sendTp,jdbcType=CHAR},
+      PRI_SEQ = #{priSeq,jdbcType=INTEGER},
+      REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+      REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP}
+    where CONTACT_ID = #{contactId,jdbcType=INTEGER}
+  </update>
+</mapper>

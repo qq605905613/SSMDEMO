@@ -1,0 +1,87 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="queryInspect.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<script type="text/javascript" src="/MchntAudit/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="/MchntAudit/bootstrap-datetimepicker.fr.js"></script>
+<script type="text/javascript"
+	src="/MchntAudit/bootstrap-datetimepicker.min.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+<link href="/MchntAudit/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="/MchntAudit/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="queryInsApp" ng-controller="queryInsCtrl">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="width: 81%; height: 600px; overflow: auto">
+		<table class="table" style="color: white; font-size: 1vw; width: 100%">
+			<tr>
+				<td>商户代码</td>
+				<td>价格类型</td>
+				<td>商户类型</td>
+				<td>审核状态</td>
+				<td>任务结果</td>
+				<td>审核人员</td>
+				<td>质检结果</td>
+				<td>完成时间</td>
+			</tr>
+			<tr ng-repeat="inspect in inspectList">
+				<td>{{inspect.mchntCd}}</td>
+				<td>{{inspect.mchntTp|filterPriceTp:inspect.specDiscTp:inspect.specDiscLvl}}</td>
+				<td>{{inspect.mchntTp}}</td>
+				<td>{{inspect.auditSt|filterAuditSt}}</td>
+				<td>{{inspect.taskResult|filterTask}}</td>
+				<td>{{inspect.assignUsrCd}}</td>
+				<td>{{inspect.isRight|filterIsRight}}</td>
+				<td>{{inspect.recUpdTs|date:"yyyy-MM-dd HH:mm"}}</td>
+			</tr>
+		</table>
+		<div>
+			<span style="color: white">当前页：第{{startPage}}页</span> <span
+				style="color: white">总页数：{{totalPage}}页</span> <span
+				style="color: white">总条数：{{totalNum}}</span> <a href=""
+				ng-click="lastPage()" style="margin-left: 320px; color: white">上一页</a>
+			<a href="" ng-click="nextPage()" style="color: white">下一页</a>
+		</div>
+		<select style="width: 15%; float: left; margin-top: 5%;"
+			class="form-control" ng-model="mccTp" ng-init="mccTp=''"
+			ng-options="mcc.key as mcc.value for mcc in mccTpList"></select> <select
+			style="width: 10%; float: left; margin-top: 5%; margin-left: 2%"
+			class="form-control" ng-model="isRight" ng-init="isRight=''"
+			ng-options="isRt.key as isRt.value for isRt in isRightList"></select>
+		<span
+			style="margin-top: 5%; color: white; float: left; margin-left: 2%">开始日期：</span>
+		<input size="16" type="text" value="" readonly class="form_datetime"
+			style="width: 10%; float: left; margin-top: 5%" id="startTime">
+		<span
+			style="margin-top: 5%; color: white; float: left; margin-left: 2%">结束日期：</span>
+		<input size="16" type="text" value="" readonly class="form_datetime"
+			id="endTime" style="width: 10%; float: left; margin-top: 5%">
+		<button type="button" class="btn btn-primary btn-lg"
+			style="margin-top: 5%; float: right; width: 10%;" ng-click="query()">查询</button>
+	</div>
+</body>
+</html>

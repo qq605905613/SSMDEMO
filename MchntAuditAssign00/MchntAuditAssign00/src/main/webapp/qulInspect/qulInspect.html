@@ -1,0 +1,178 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="qulInspect.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<script type="text/javascript" src="/MchntAudit/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="/MchntAudit/bootstrap-datetimepicker.fr.js"></script>
+<script type="text/javascript"
+	src="/MchntAudit/bootstrap-datetimepicker.min.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+<link href="/MchntAudit/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="/MchntAudit/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="inspectApp" ng-controller="inspectCtrl">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="color: white">
+		<h1 align="center">Welcome,{{usrNm}}</h1>
+	</div>
+	<div style="margin-left: 5%; margin-top: 10%; width: 10%; float: left">
+		<div class="form-group">
+			<select class="form-control" ng-model="mccTp" ng-init="mccTp=''"
+				ng-options="mcc.key as mcc.value for mcc in mccList"></select> <select
+				class="form-control" ng-model="taskResult" ng-init="taskResult=''"
+				style="margin-top: 5%"
+				ng-options="taskRt.key as taskRt.value for taskRt in taskRtList"></select>
+			<select style="margin-top: 5%" class="form-control"
+				ng-model="mchntRating" ng-init="mchntRating=''"
+				ng-show="taskResult=='0'"
+				ng-options="mchntRt.key as mchntRt.value for mchntRt in mchntRtList"></select>
+			<input style="margin-top: 5%" type="text" class="form-control"
+				placeholder="所属分公司代码" ng-model="cupBranchIdCd">
+			<input style="margin-top: 5%" type="text" class="form-control"
+				placeholder="审核人员姓名" ng-model="assignUsrNm"> <input
+				type="text" style="margin-top: 5%" class="form-control"
+				placeholder="小组名" ng-model="groupId"> <span
+				style="margin-top: 5%; color: white">开始日期：</span><input size="16"
+				type="text" value="" readonly class="form_datetime"
+				style="width: 100%" id="startTime"> <span
+				style="margin-top: 5%; color: white">结束日期：</span><input size="16"
+				type="text" value="" readonly class="form_datetime" id="endTime"
+				style="width: 100%">
+			<button type="button" class="btn btn-primary btn-lg"
+				style="margin-top: 5%" ng-click="getInspect()" data-toggle="modal"
+				data-target="#myDetailBox">获取质检单</button>
+		</div>
+	</div>
+	<div class="modal fade" id="myDetailBox" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">质检任务单</h4>
+				</div>
+				<div class="modal-body">
+					<table class="task_table">
+						<tr>
+							<td>商户代码</td>
+							<td>{{mchntCd}}</td>
+						</tr>
+						<tr>
+							<td>商户名称</td>
+							<td>{{mchntCnNm}}</td>
+						</tr>
+						<tr>
+							<td>接入方式</td>
+							<td>{{connMd|filterConnMd}}</td>
+						</tr>
+						<tr>
+							<td>审核状态</td>
+							<td>{{auditSt|filterAuditSt}}</td>
+						</tr>
+						<tr>
+							<td>价格类型</td>
+							<td>{{priceTp|filterPriceTp}}</td>
+						</tr>
+						<tr>
+							<td>商户类型</td>
+							<td>{{mchntTp}}</td>
+						</tr>
+						<tr>
+							<td>商户服务类型</td>
+							<td>{{mchntSrvTp}}</td>
+						</tr>
+						<tr>
+							<td>所属分公司</td>
+							<td>{{cupBranchInsIdCd}}</td>
+						</tr>
+						<tr>
+							<td>审核结果</td>
+							<td>{{taskRs|filterTaskRs}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#myRightBox">正确</button>
+					<button type="button" class="btn btn-danger" data-toggle="modal"
+						data-target="#myWrongBox">错误</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myRightBox" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">正确原因</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="form-control" placeholder="备注项"
+						ng-model="rightReason"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						ng-click="dealInspect('1')">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myWrongBox" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">错误原因</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="form-control" placeholder="请输入错误原因"
+						ng-model="wrongReason"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						ng-click="dealInspect('2')">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

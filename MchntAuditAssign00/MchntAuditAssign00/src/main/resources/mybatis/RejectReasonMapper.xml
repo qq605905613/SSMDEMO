@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.RejectReasonMapper">
+	<resultMap id="BaseResultMap"
+		type="com.unionpay.opdept.mchntaudit.orm.bean.RejectReason">
+		<id column="REASON_ID" property="reasonId" jdbcType="CHAR" />
+		<result column="TASK_ID" property="taskId" jdbcType="CHAR" />
+		<result column="REASON_TP" property="reasonTp" jdbcType="CHAR" />
+		<result column="REASON_MEMO" property="reasonMemo" jdbcType="VARCHAR" />
+		<result column="REC_ST" property="recSt" jdbcType="CHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="REC_CRT_TS" property="recCrtTs" jdbcType="TIMESTAMP" />
+		<result column="REC_UPD_TS" property="recUpdTs" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		REASON_ID, TASK_ID, REASON_TP, REASON_MEMO, REC_ST,
+		COMMENTS, REC_CRT_TS,
+		REC_UPD_TS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_REJECT_REASON
+		where REASON_ID =
+		#{reasonId,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		MMGM.TBL_MMGM_REJECT_REASON
+		where REASON_ID = #{reasonId,jdbcType=CHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.RejectReason">
+		insert into MMGM.TBL_MMGM_REJECT_REASON (REASON_ID,
+		TASK_ID,
+		REASON_TP,
+		REASON_MEMO, REC_ST, COMMENTS,
+		REC_CRT_TS,
+		REC_UPD_TS)
+		values (#{reasonId,jdbcType=CHAR}, #{taskId,jdbcType=CHAR},
+		#{reasonTp,jdbcType=CHAR},
+		#{reasonMemo,jdbcType=VARCHAR},
+		#{recSt,jdbcType=CHAR}, #{comments,jdbcType=VARCHAR},
+		#{recCrtTs,jdbcType=TIMESTAMP}, #{recUpdTs,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.RejectReason">
+		insert into MMGM.TBL_MMGM_REJECT_REASON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reasonId != null">
+				REASON_ID,
+			</if>
+			<if test="taskId != null">
+				TASK_ID,
+			</if>
+			<if test="reasonTp != null">
+				REASON_TP,
+			</if>
+			<if test="reasonMemo != null">
+				REASON_MEMO,
+			</if>
+			<if test="recSt != null">
+				REC_ST,
+			</if>
+			<if test="comments != null">
+				COMMENTS,
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS,
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reasonId != null">
+				#{reasonId,jdbcType=CHAR},
+			</if>
+			<if test="taskId != null">
+				#{taskId,jdbcType=CHAR},
+			</if>
+			<if test="reasonTp != null">
+				#{reasonTp,jdbcType=CHAR},
+			</if>
+			<if test="reasonMemo != null">
+				#{reasonMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				#{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				#{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				#{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				#{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.RejectReason">
+		update MMGM.TBL_MMGM_REJECT_REASON
+		<set>
+			<if test="taskId != null">
+				TASK_ID = #{taskId,jdbcType=CHAR},
+			</if>
+			<if test="reasonTp != null">
+				REASON_TP = #{reasonTp,jdbcType=CHAR},
+			</if>
+			<if test="reasonMemo != null">
+				REASON_MEMO = #{reasonMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where REASON_ID = #{reasonId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.unionpay.opdept.mchntaudit.orm.bean.RejectReason">
+		update MMGM.TBL_MMGM_REJECT_REASON
+		set TASK_ID =
+		#{taskId,jdbcType=CHAR},
+		REASON_TP = #{reasonTp,jdbcType=CHAR},
+		REASON_MEMO = #{reasonMemo,jdbcType=VARCHAR},
+		REC_ST =
+		#{recSt,jdbcType=CHAR},
+		COMMENTS = #{comments,jdbcType=VARCHAR},
+		REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+		REC_UPD_TS =
+		#{recUpdTs,jdbcType=TIMESTAMP}
+		where REASON_ID =
+		#{reasonId,jdbcType=CHAR}
+	</update>
+	<insert id="insertByList" parameterType="java.util.List">
+		insert into MMGM.TBL_MMGM_REJECT_REASON
+		(
+		REASON_ID,TASK_ID,REASON_TP,REASON_MEMO,REC_ST,
+		REC_CRT_TS,REC_UPD_TS
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			<if test="item.reasonId!=null">
+				#{item.reasonId,jdbcType=CHAR},
+			</if>
+			<if test="item.taskId!=null">
+				#{item.taskId,jdbcType=CHAR},
+			</if>
+			<if test="item.reasonTp!=null">
+				#{item.reasonTp,jdbcType=CHAR},
+			</if>
+			<if test="item.reasonMemo!=null">
+				#{item.reasonMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="item.recSt!=null">
+				#{item.recSt,jdbcType=CHAR},
+			</if>
+			<if test="item.recCrtTs!=null">
+				#{item.recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="item.recUpdTs!=null">
+				#{item.recUpdTs,jdbcType=TIMESTAMP}
+			</if>
+			)
+		</foreach>
+	</insert>
+	<select id="selectByTaskId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from MMGM.TBL_MMGM_REJECT_REASON
+		where task_id=#{taskId,jdbcType=CHAR}
+		and rec_st='0'
+	</select>
+</mapper>

@@ -1,0 +1,88 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<html>
+<head>
+
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="stockTask.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body ng-app="stockTaskApp" ng-controller="stockTaskCtrl">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="float: right; margin-right: 40%">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="getTask()"
+			ng-if="!LoadBtn">获取任务</button>
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-if="LoadBtn"
+			disabled="true">加载中...</button>
+	</div>
+	<div
+		style="width: 1000px; height: 500px; padding: 50px 0 0 100px; margin: 0 auto">
+		<h3 style="color: white">剩余任务数量：{{restNum}}</h3>
+		<table style="color: white" cellspacing=15>
+			<tr>
+				<td>商户代码</td>
+				<td>{{mchntCd}}</td>
+			</tr>
+			<tr>
+				<td>商户名称</td>
+				<td>{{mchntCnNm}}</td>
+			</tr>
+			<tr>
+				<td>接入方式</td>
+				<td>{{connMd|filterConnMd}}</td>
+			</tr>
+			<tr>
+				<td>审核状态</td>
+				<td>{{auditSt|filterAuditSt}}</td>
+			</tr>
+			<tr>
+				<td>价格类型</td>
+				<td>{{priceTp|filterPriceTp}}</td>
+			</tr>
+			<tr>
+				<td>商户类型</td>
+				<td>{{mchntTp}}</td>
+			</tr>
+			<tr>
+				<td>商户服务类型</td>
+				<td>{{mchntSrvTp}}</td>
+			</tr>
+			<tr>
+				<td>所属分公司</td>
+				<td>{{cupBranchInsIdCd}}</td>
+			</tr>
+		</table>
+	</div>
+	<div style="float: left; margin-left: 28%" ng-if="showButton">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="pass()">审核通过</button>
+	</div>
+	<div style="float: left; margin-left: 10%" ng-if="showButton">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="reject()">审核拒绝</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<html>
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="http://code.angularjs.org/1.4.6/angular-cookies.min.js"></script>
+<script src="auditTask.js"></script>
+<script src="/MchntAudit/common/filter.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="taskApp" ng-controller="taskCtrl">
+	<div class="menu">
+		<div class="navbox">
+			<ul class="nav">
+				<li><a href="/MchntAudit/index/index.html">主页</a></li>
+				<li><a href="/MchntAudit/audit/auditTask.html">非标派发</a></li>
+				<li><a href="/MchntAudit/stock/stockTask.html">存量派发</a></li>
+				<li><a href="/MchntAudit/queryTask/queryTask.html">历史查询</a></li>
+				<li><a href="/MchntAudit/operation/queryOpera.html">operation查询</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/qulInspect/qulInspect.html">质检派发</a></li>
+				<li ng-if="comments=='1'"><a
+					href="/MchntAudit/queryInspect/queryInspect.html">质检历史查询</a></li>
+						<li><a href="/MchntAudit/user/usercurd.html">人员管理</a></li>
+				<li><a href="/MchntAudit/modPwd/modPwd.html">密码修改</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="float: right; margin-right: 100px; margin-top: -20px">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="logout()">退出</button>
+	</div>
+	<div style="float: right; margin-right: 40%">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="getTask()"
+			ng-if="!LoadBtn">获取任务</button>
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-if="LoadBtn"
+			disabled="true">加载中...</button>
+	</div>
+	<div
+		style="width: 1000px; height: 500px; padding: 50px 0 0 100px; margin: 0 auto">
+		<h3 style="color: white">剩余任务数量：{{restNum}}</h3>
+		<table style="color: white" cellspacing=15>
+			<tr>
+				<td>商户代码</td>
+				<td>{{mchntCd}}</td>
+			</tr>
+			<tr>
+				<td>商户名称</td>
+				<td>{{mchntCnNm}}</td>
+			</tr>
+			<tr>
+				<td>接入方式</td>
+				<td>{{connMd|filterConnMd}}</td>
+			</tr>
+			<tr>
+				<td>审核状态</td>
+				<td>{{auditSt|filterAuditSt}}</td>
+			</tr>
+			<tr>
+				<td>价格类型</td>
+				<td>{{priceTp|filterPriceTp}}</td>
+			</tr>
+			<tr>
+				<td>商户类型</td>
+				<td>{{mchntTp}}</td>
+			</tr>
+			<tr>
+				<td>商户服务类型</td>
+				<td>{{mchntSrvTp}}</td>
+			</tr>
+			<tr>
+				<td>所属分公司</td>
+				<td>{{cupBranchInsIdCd}}</td>
+			</tr>
+			<tr>
+				<td>受理机构代码</td>
+				<td>{{acptInsIdCd|filterAcp}}</td>
+			<tr>
+		</table>
+	</div>
+	<div ng-if="passBox" class="popUpBox"
+		style="left: 20%; top: 30%; height: 63%">
+		<img src="/MchntAudit/image/close.jpg"
+			style="height: 8%; width: 5%; float: right; cursor: pointer"
+			ng-click="closePass()"></img>
+		<div class="text-area">
+			<textarea placeholder="请输入数字6-10" id="rating" maxlength=2
+				required="required"></textarea>
+		</div>
+		<div class="btn-confirm">
+			<button type="submit" ng-click="pass()">确定</button>
+			<button type="submit" ng-click="closePass()"
+				style="margin-left: 40px">取消</button>
+		</div>
+	</div>
+	<div ng-if="rejectBox" class="popUpBox"
+		style="left: 28%; top: 10%; height: 60%; width: 50%">
+		<img src="/MchntAudit/image/close.jpg"
+			style="height: 5%; width: 3%; float: right; cursor: pointer"
+			ng-click="closeReject()"></img>
+		<div class="text-area">
+			<table style="font-size: 0.8vw; float: left">
+				<tr ng-repeat="comm in reason_list_a">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_b">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_c">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_d">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_e">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<table style="font-size: 0.5vw; float: left">
+				<tr ng-repeat="comm in reason_list_f">
+					<td><input type="checkbox" ng-model="checked"
+						ng-click="updateChecked(checked,comm.reasonTp,comm.reasonMemo)" /></td>
+					<td>{{comm.reasonMemo}}</td>
+				</tr>
+			</table>
+			<div style="clear:left" align="center">
+			<textarea id="rejectReason" placeholder="其他原因"
+				style="width: 430px; height: 200px"></textarea>
+			</div>
+		</div>
+		<div class="btn-confirm">
+			<button type="submit" ng-click="reject()">确定</button>
+			<button type="submit" ng-click="closeReject()"
+				style="margin-left: 40px">取消</button>
+		</div>
+	</div>
+	<div ng-if="pendingBox" class="popUpBox"
+		style="left: 20%; top: 30%; height: 63%">
+		<img src="/MchntAudit/image/close.jpg"
+			style="height: 8%; width: 5%; float: right; cursor: pointer"
+			ng-click="closePending()"></img>
+		<div class="text-area">
+			<textarea placeholder="请输入挂起原因" id="pendingReason"
+				required="required"></textarea>
+		</div>
+		<div class="btn-confirm">
+			<button type="submit" ng-click="pending()">确定</button>
+			<button type="submit" ng-click="closePending()"
+				style="margin-left: 40px">取消</button>
+		</div>
+	</div>
+	<div style="float: left; margin-left: 28% ;margin-top: 2%" ng-if="showButton">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="passPop()">审核通过</button>
+	</div>
+	<div style="float: left; margin-left: 10%;;margin-top: 2%" ng-if="showButton">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="rejectPop()">审核拒绝</button>
+	</div>
+	<div style="float: left; margin-left: 10% ;margin-top: 2%" ng-if="showButton">
+		<button style="width: 150%" type="submit"
+			class="btn btn-primary btn-block btn-large" ng-click="pendingPop()">挂起</button>
+
+	
+</body>
+</html>

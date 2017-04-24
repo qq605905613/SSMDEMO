@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.opdept.mchntaudit.orm.mapper.TaskAssignMapper">
+	<resultMap id="BaseResultMap"
+		type="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		<id column="TASK_ID" property="taskId" jdbcType="CHAR" />
+		<result column="MCHNT_SRV_TP" property="mchntSrvTp" jdbcType="CHAR" />
+		<result column="MCHNT_CD" property="mchntCd" jdbcType="CHAR" />
+		<result column="MCHNT_CN_NM" property="mchntCnNm" jdbcType="VARCHAR" />
+		<result column="ACQ_INS_ID_CD" property="acqInsIdCd" jdbcType="VARCHAR" />
+		<result column="ACPT_INS_ID_CD" property="acptInsIdCd"
+			jdbcType="VARCHAR" />
+		<result column="CUP_BRANCH_INS_ID_CD" property="cupBranchInsIdCd"
+			jdbcType="VARCHAR" />
+		<result column="CONN_MD" property="connMd" jdbcType="CHAR" />
+		<result column="MCHNT_TP" property="mchntTp" jdbcType="CHAR" />
+		<result column="SPEC_DISC_TP" property="specDiscTp" jdbcType="CHAR" />
+		<result column="SPEC_DISC_LVL" property="specDiscLvl" jdbcType="CHAR" />
+		<result column="IS_WHITE_MCHNT" property="isWhiteMchnt"
+			jdbcType="CHAR" />
+		<result column="ACQ_COMMIT_AUDIT_TS" property="acqCommitAuditTs"
+			jdbcType="TIMESTAMP" />
+		<result column="AUDIT_ST" property="auditSt" jdbcType="CHAR" />
+		<result column="MCHNT_AUDIT_ID" property="mchntAuditId"
+			jdbcType="CHAR" />
+		<result column="ASSIGN_TS" property="assignTs" jdbcType="TIMESTAMP" />
+		<result column="ASSIGN_USR_CD" property="assignUsrCd" jdbcType="VARCHAR" />
+		<result column="ASSIGN_GROUP_ID" property="assignGroupId"
+			jdbcType="VARCHAR" />
+		<result column="PLAN_DONE_TS" property="planDoneTs" jdbcType="TIMESTAMP" />
+		<result column="ACTUAL_DONE_TS" property="actualDoneTs"
+			jdbcType="TIMESTAMP" />
+		<result column="TASK_RESULT" property="taskResult" jdbcType="CHAR" />
+		<result column="MCHNT_RATING" property="mchntRating" jdbcType="INTEGER" />
+		<result column="PENDING_MEMO" property="pendingMemo" jdbcType="VARCHAR" />
+		<result column="REJECT_MEMO" property="rejectMemo" jdbcType="VARCHAR" />
+		<result column="REC_ST" property="recSt" jdbcType="CHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="REC_CRT_TS" property="recCrtTs" jdbcType="TIMESTAMP" />
+		<result column="REC_UPD_TS" property="recUpdTs" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TASK_ID, MCHNT_SRV_TP, MCHNT_CD, MCHNT_CN_NM,
+		ACQ_INS_ID_CD, ACPT_INS_ID_CD,
+		CUP_BRANCH_INS_ID_CD,
+		CONN_MD, MCHNT_TP,
+		SPEC_DISC_TP, SPEC_DISC_LVL, IS_WHITE_MCHNT,
+		ACQ_COMMIT_AUDIT_TS,
+		AUDIT_ST, MCHNT_AUDIT_ID, ASSIGN_TS, ASSIGN_USR_CD, ASSIGN_GROUP_ID,
+		PLAN_DONE_TS,
+		ACTUAL_DONE_TS, TASK_RESULT, MCHNT_RATING, PENDING_MEMO,
+		REJECT_MEMO, REC_ST,
+		COMMENTS,
+		REC_CRT_TS, REC_UPD_TS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_TASK_ASSIGN
+		where TASK_ID = #{taskId,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		MMGM.TBL_MMGM_TASK_ASSIGN
+		where TASK_ID = #{taskId,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		insert into
+		MMGM.TBL_MMGM_TASK_ASSIGN (TASK_ID, MCHNT_SRV_TP,
+		MCHNT_CD,
+		MCHNT_CN_NM, ACQ_INS_ID_CD, ACPT_INS_ID_CD,
+		CUP_BRANCH_INS_ID_CD,
+		CONN_MD, MCHNT_TP,
+		SPEC_DISC_TP, SPEC_DISC_LVL, IS_WHITE_MCHNT,
+		ACQ_COMMIT_AUDIT_TS, AUDIT_ST, MCHNT_AUDIT_ID,
+		ASSIGN_TS,
+		ASSIGN_USR_CD, ASSIGN_GROUP_ID,
+		PLAN_DONE_TS, ACTUAL_DONE_TS,
+		TASK_RESULT,
+		MCHNT_RATING, PENDING_MEMO, REJECT_MEMO,
+		REC_ST, COMMENTS,
+		REC_CRT_TS,
+		REC_UPD_TS)
+		values (#{taskId,jdbcType=CHAR},
+		#{mchntSrvTp,jdbcType=CHAR},
+		#{mchntCd,jdbcType=CHAR},
+		#{mchntCnNm,jdbcType=VARCHAR}, #{acqInsIdCd,jdbcType=VARCHAR},
+		#{acptInsIdCd,jdbcType=VARCHAR},
+		#{cupBranchInsIdCd,jdbcType=VARCHAR},
+		#{connMd,jdbcType=CHAR},
+		#{mchntTp,jdbcType=CHAR},
+		#{specDiscTp,jdbcType=CHAR}, #{specDiscLvl,jdbcType=CHAR},
+		#{isWhiteMchnt,jdbcType=CHAR},
+		#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+		#{auditSt,jdbcType=CHAR},
+		#{mchntAuditId,jdbcType=CHAR},
+		#{assignTs,jdbcType=TIMESTAMP}, #{assignUsrCd,jdbcType=VARCHAR},
+		#{assignGroupId,jdbcType=VARCHAR},
+		#{planDoneTs,jdbcType=TIMESTAMP},
+		#{actualDoneTs,jdbcType=TIMESTAMP},
+		#{taskResult,jdbcType=CHAR},
+		#{mchntRating,jdbcType=INTEGER}, #{pendingMemo,jdbcType=VARCHAR},
+		#{rejectMemo,jdbcType=VARCHAR},
+		#{recSt,jdbcType=CHAR},
+		#{comments,jdbcType=VARCHAR},
+		#{recCrtTs,jdbcType=TIMESTAMP},
+		#{recUpdTs,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		insert into MMGM.TBL_MMGM_TASK_ASSIGN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				TASK_ID,
+			</if>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP,
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD,
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM,
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD,
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD,
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD,
+			</if>
+			<if test="connMd != null">
+				CONN_MD,
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP,
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP,
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL,
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT,
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS,
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST,
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID,
+			</if>
+			<if test="assignTs != null">
+				ASSIGN_TS,
+			</if>
+			<if test="assignUsrCd != null">
+				ASSIGN_USR_CD,
+			</if>
+			<if test="assignGroupId != null">
+				ASSIGN_GROUP_ID,
+			</if>
+			<if test="planDoneTs != null">
+				PLAN_DONE_TS,
+			</if>
+			<if test="actualDoneTs != null">
+				ACTUAL_DONE_TS,
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT,
+			</if>
+			<if test="mchntRating != null">
+				MCHNT_RATING,
+			</if>
+			<if test="pendingMemo != null">
+				PENDING_MEMO,
+			</if>
+			<if test="rejectMemo != null">
+				REJECT_MEMO,
+			</if>
+			<if test="recSt != null">
+				REC_ST,
+			</if>
+			<if test="comments != null">
+				COMMENTS,
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS,
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				#{taskId,jdbcType=CHAR},
+			</if>
+			<if test="mchntSrvTp != null">
+				#{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				#{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				#{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				#{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				#{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				#{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				#{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				#{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				#{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				#{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				#{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				#{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="assignTs != null">
+				#{assignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assignUsrCd != null">
+				#{assignUsrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="assignGroupId != null">
+				#{assignGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="planDoneTs != null">
+				#{planDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actualDoneTs != null">
+				#{actualDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskResult != null">
+				#{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="mchntRating != null">
+				#{mchntRating,jdbcType=INTEGER},
+			</if>
+			<if test="pendingMemo != null">
+				#{pendingMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="rejectMemo != null">
+				#{rejectMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				#{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				#{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				#{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				#{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		update MMGM.TBL_MMGM_TASK_ASSIGN
+		<set>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP = #{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD = #{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD = #{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD =
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				CONN_MD = #{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT = #{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS =
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST = #{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID = #{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="assignTs != null">
+				ASSIGN_TS = #{assignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assignUsrCd != null">
+				ASSIGN_USR_CD = #{assignUsrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="assignGroupId != null">
+				ASSIGN_GROUP_ID = #{assignGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="planDoneTs != null">
+				PLAN_DONE_TS = #{planDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actualDoneTs != null">
+				ACTUAL_DONE_TS = #{actualDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT = #{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="mchntRating != null">
+				MCHNT_RATING = #{mchntRating,jdbcType=INTEGER},
+			</if>
+			<if test="pendingMemo != null">
+				PENDING_MEMO = #{pendingMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="rejectMemo != null">
+				REJECT_MEMO = #{rejectMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where TASK_ID = #{taskId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		update
+		MMGM.TBL_MMGM_TASK_ASSIGN
+		set MCHNT_SRV_TP =
+		#{mchntSrvTp,jdbcType=CHAR},
+		MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+		MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+		ACQ_INS_ID_CD =
+		#{acqInsIdCd,jdbcType=VARCHAR},
+		ACPT_INS_ID_CD =
+		#{acptInsIdCd,jdbcType=VARCHAR},
+		CUP_BRANCH_INS_ID_CD =
+		#{cupBranchInsIdCd,jdbcType=VARCHAR},
+		CONN_MD =
+		#{connMd,jdbcType=CHAR},
+		MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+		SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+		SPEC_DISC_LVL =
+		#{specDiscLvl,jdbcType=CHAR},
+		IS_WHITE_MCHNT =
+		#{isWhiteMchnt,jdbcType=CHAR},
+		ACQ_COMMIT_AUDIT_TS =
+		#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+		AUDIT_ST =
+		#{auditSt,jdbcType=CHAR},
+		MCHNT_AUDIT_ID =
+		#{mchntAuditId,jdbcType=CHAR},
+		ASSIGN_TS =
+		#{assignTs,jdbcType=TIMESTAMP},
+		ASSIGN_USR_CD =
+		#{assignUsrCd,jdbcType=VARCHAR},
+		ASSIGN_GROUP_ID =
+		#{assignGroupId,jdbcType=VARCHAR},
+		PLAN_DONE_TS =
+		#{planDoneTs,jdbcType=TIMESTAMP},
+		ACTUAL_DONE_TS =
+		#{actualDoneTs,jdbcType=TIMESTAMP},
+		TASK_RESULT =
+		#{taskResult,jdbcType=CHAR},
+		MCHNT_RATING =
+		#{mchntRating,jdbcType=INTEGER},
+		PENDING_MEMO =
+		#{pendingMemo,jdbcType=VARCHAR},
+		REJECT_MEMO =
+		#{rejectMemo,jdbcType=VARCHAR},
+		REC_ST = #{recSt,jdbcType=CHAR},
+		COMMENTS = #{comments,jdbcType=VARCHAR},
+		REC_CRT_TS =
+		#{recCrtTs,jdbcType=TIMESTAMP},
+		REC_UPD_TS =
+		#{recUpdTs,jdbcType=TIMESTAMP}
+		where TASK_ID = #{taskId,jdbcType=CHAR}
+	</update>
+	<select id="selectTaskByUser" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_TASK_ASSIGN
+		where ASSIGN_USR_CD =
+		#{usrCd,jdbcType=VARCHAR} and
+		IS_WHITE_MCHNT =
+		#{isWhiteMchnt,jdbcType=CHAR} and
+		TASK_RESULT='3' and REC_ST='0'
+		order
+		by
+		ASSIGN_TS fetch first 1
+		rows
+		only
+	</select>
+	<update id="updateByPrimaryKeyAndUserSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		update MMGM.TBL_MMGM_TASK_ASSIGN
+		<set>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP = #{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD = #{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD = #{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD =
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				CONN_MD = #{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT = #{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS =
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST = #{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID = #{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="assignTs != null">
+				ASSIGN_TS = #{assignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assignUsrCd != null">
+				ASSIGN_USR_CD = #{assignUsrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="assignGroupId != null">
+				ASSIGN_GROUP_ID = #{assignGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="planDoneTs != null">
+				PLAN_DONE_TS = #{planDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actualDoneTs != null">
+				ACTUAL_DONE_TS = #{actualDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT = #{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="mchntRating != null">
+				MCHNT_RATING = #{mchntRating,jdbcType=INTEGER},
+			</if>
+			<if test="pendingMemo != null">
+				PENDING_MEMO = #{pendingMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="rejectMemo != null">
+				REJECT_MEMO = #{rejectMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where TASK_ID = #{taskId,jdbcType=CHAR}
+		and ASSIGN_USR_CD =
+		#{assignUsrCd,jdbcType=VARCHAR} and REC_ST ='0'
+	</update>
+	<select id="selectTaskByPaging"
+		parameterType="com.unionpay.opdept.mchntaudit.model.QueryTaskPagingServiceReq"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from (select row_number() over(order by ACTUAL_DONE_TS DESC)as
+		row_num,
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_TASK_ASSIGN where
+		<if test="taskSt!=null">
+			TASK_RESULT=#{taskSt,jdbcType=CHAR} and
+		</if>
+		<if test="auditSt!=null">
+			AUDIT_ST=#{auditSt,jdbcType=CHAR} and
+		</if>
+		<if test="isWhiteMchnt!=null">
+			IS_WHITE_MCHNT=#{isWhiteMchnt,jdbcType=CHAR} and
+		</if>
+		ASSIGN_USR_CD
+		=
+		#{usrCd,jdbcType=VARCHAR} and REC_ST ='0') where
+		row_num
+		between
+		#{startNum} and #{endNum}
+		<if test="startTime!=null">
+			and REC_UPD_TS between #{startTime,jdbcType=TIMESTAMP} and
+			#{endTime,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+	<select id="selectTotalTaskCount"
+		parameterType="com.unionpay.opdept.mchntaudit.model.QueryTaskPagingServiceReq"
+		resultType="java.lang.Integer">
+		select count(*) from MMGM.TBL_MMGM_TASK_ASSIGN where
+		<if test="taskSt!=null">
+			TASK_RESULT=#{taskSt,jdbcType=CHAR} and
+		</if>
+		<if test="auditSt!=null">
+			AUDIT_ST=#{auditSt,jdbcType=CHAR} and
+		</if>
+		<if test="isWhiteMchnt!=null">
+			IS_WHITE_MCHNT=#{isWhiteMchnt,jdbcType=CHAR} and
+		</if>
+		ASSIGN_USR_CD
+		=
+		#{usrCd,jdbcType=VARCHAR} and REC_ST ='0'
+		<if test="startTime!=null">
+			and REC_UPD_TS between #{startTime,jdbcType=TIMESTAMP} and
+			#{endTime,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+	<select id="selectTaskCountByTime" resultType="java.lang.Integer">
+		select count(*) from MMGM.TBL_MMGM_TASK_ASSIGN where
+		<if test="taskSt!=null">
+			TASK_RESULT=#{taskSt,jdbcType=CHAR} and
+		</if>
+		ASSIGN_USR_CD
+		=
+		#{userCd,jdbcType=VARCHAR} and REC_ST ='0' and
+		REC_UPD_TS between #{startDate,jdbcType=TIMESTAMP} and
+		#{endDate,jdbcType=TIMESTAMP}
+	</select>
+	<select id="queryTaskByTime" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_TASK_ASSIGN where
+		<if test="taskSt!=null">
+			TASK_RESULT=#{taskSt,jdbcType=CHAR} and
+		</if>
+		ASSIGN_USR_CD
+		=
+		#{userCd,jdbcType=VARCHAR} and REC_ST ='0' and
+		REC_UPD_TS between #{startDate,jdbcType=TIMESTAMP} and
+		#{endDate,jdbcType=TIMESTAMP}
+	</select>
+	<select id="selectTaskByRecord" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MMGM.TBL_MMGM_TASK_ASSIGN where
+		<if test="taskId != null">
+			TASK_ID = #{taskId,jdbcType=CHAR} and
+		</if>
+		<if test="mchntSrvTp != null">
+			MCHNT_SRV_TP = #{mchntSrvTp,jdbcType=CHAR} and
+		</if>
+		<if test="mchntCd != null">
+			MCHNT_CD = #{mchntCd,jdbcType=CHAR} and
+		</if>
+		<if test="mchntCnNm != null">
+			MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR} and
+		</if>
+		<if test="acqInsIdCd != null">
+			ACQ_INS_ID_CD = #{acqInsIdCd,jdbcType=VARCHAR} and
+		</if>
+		<if test="acptInsIdCd != null">
+			ACPT_INS_ID_CD = #{acptInsIdCd,jdbcType=VARCHAR} and
+		</if>
+		<if test="cupBranchInsIdCd != null">
+			CUP_BRANCH_INS_ID_CD =
+			#{cupBranchInsIdCd,jdbcType=VARCHAR} and
+		</if>
+		<if test="connMd != null">
+			CONN_MD = #{connMd,jdbcType=CHAR} and
+		</if>
+		<if test="mchntTp != null">
+			MCHNT_TP = #{mchntTp,jdbcType=CHAR} and
+		</if>
+		<if test="specDiscTp != null">
+			SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR} and
+		</if>
+		<if test="specDiscLvl != null">
+			SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR} and
+		</if>
+		<if test="isWhiteMchnt != null">
+			IS_WHITE_MCHNT = #{isWhiteMchnt,jdbcType=CHAR} and
+		</if>
+		<if test="acqCommitAuditTs != null">
+			ACQ_COMMIT_AUDIT_TS =
+			#{acqCommitAuditTs,jdbcType=TIMESTAMP} and
+		</if>
+		<if test="auditSt != null">
+			AUDIT_ST = #{auditSt,jdbcType=CHAR} and
+		</if>
+		<if test="mchntAuditId != null">
+			MCHNT_AUDIT_ID = #{mchntAuditId,jdbcType=CHAR} and
+		</if>
+		<if test="assignTs != null">
+			ASSIGN_TS = #{assignTs,jdbcType=TIMESTAMP} and
+		</if>
+		<if test="assignGroupId != null">
+			ASSIGN_GROUP_ID = #{assignGroupId,jdbcType=VARCHAR} and
+		</if>
+		<if test="planDoneTs != null">
+			PLAN_DONE_TS = #{planDoneTs,jdbcType=TIMESTAMP} and
+		</if>
+		<if test="actualDoneTs != null">
+			ACTUAL_DONE_TS = #{actualDoneTs,jdbcType=TIMESTAMP} and
+		</if>
+		<if test="taskResult != null">
+			TASK_RESULT = #{taskResult,jdbcType=CHAR} and
+		</if>
+		<if test="mchntRating != null">
+			MCHNT_RATING = #{mchntRating,jdbcType=INTEGER} and
+		</if>
+		<if test="pendingMemo != null">
+			PENDING_MEMO = #{pendingMemo,jdbcType=VARCHAR} and
+		</if>
+		<if test="rejectMemo != null">
+			REJECT_MEMO = #{rejectMemo,jdbcType=VARCHAR} and
+		</if>
+		<if test="recSt != null">
+			REC_ST = #{recSt,jdbcType=CHAR} and
+		</if>
+		<if test="comments != null">
+			COMMENTS = #{comments,jdbcType=VARCHAR} and
+		</if>
+		<if test="recCrtTs != null">
+			REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP} and
+		</if>
+		<if test="recUpdTs != null">
+			REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP} and
+		</if>
+		ASSIGN_USR_CD = #{assignUsrCd,jdbcType=VARCHAR}
+	</select>
+	<select id="selectInspectTask"
+		parameterType="com.unionpay.opdept.mchntaudit.model.QualityInspectTaskReq"
+		resultMap="BaseResultMap">
+		select
+		TASK_ID, MCHNT_SRV_TP, MCHNT_CD, MCHNT_CN_NM,
+		ACQ_INS_ID_CD,
+		ACPT_INS_ID_CD,
+		CUP_BRANCH_INS_ID_CD,
+		CONN_MD, MCHNT_TP,
+		SPEC_DISC_TP,
+		SPEC_DISC_LVL, IS_WHITE_MCHNT,
+		ACQ_COMMIT_AUDIT_TS,
+		AUDIT_ST,
+		MCHNT_AUDIT_ID, ASSIGN_TS, ASSIGN_USR_CD, ASSIGN_GROUP_ID,
+		PLAN_DONE_TS,
+		ACTUAL_DONE_TS, TASK_RESULT, MCHNT_RATING, PENDING_MEMO,
+		REJECT_MEMO, T.REC_ST,
+		T.COMMENTS,
+		T.REC_CRT_TS, T.REC_UPD_TS
+		from
+		MMGM.TBL_MMGM_TASK_ASSIGN T left join
+		MMGM.TBL_MMGM_AUDIT_USER U
+		ON
+		T.ASSIGN_USR_CD = U.USR_CD where
+		T.REC_ST='0'and T.COMMENTS=''
+		<if test="assignUsrNm!=null">
+			and USR_NM=#{assignUsrNm,jdbcType=VARCHAR}
+		</if>
+		<if test="groupId!=null">
+			and ASSIGN_GROUP_ID=#{groupId,jdbcType=VARCHAR}
+		</if>
+		<if test="taskResult!=null">
+			and TASK_RESULT=#{taskResult,jdbcType=CHAR}
+		</if>
+		<if test="taskResult==null">
+			and TASK_RESULT in ('0','2')
+		</if>
+		<if test="mchntRating!=null">
+			and MCHNT_RATING=#{mchntRating,jdbcType=INTEGER}
+		</if>
+		<if test="cupBranchIdCd!=null">
+			and CUP_BRANCH_INS_ID_CD=#{cupBranchIdCd,jdbcType=VARCHAR}
+		</if>
+		<if test="mccTp=='A'.toString()">
+			and mchnt_tp in
+			('8062','8011','8021','8031','8041','8042','8049','8099','8211','8220','8351','8241','8398')
+			and spec_disc_tp not in ('02','03')
+			and (spec_disc_tp!='01' or
+			spec_disc_lvl!='1')
+		</if>
+		<if test="mccTp=='B'.toString()">
+			and ((spec_disc_tp = '01' and spec_disc_lvl = '1') or
+			spec_disc_tp in ('02','03'))
+			and mchnt_tp in
+			('8651','9211','9222','9223','9311','9399')
+		</if>
+		<if test="mccTp=='C'.toString()">
+			and ((spec_disc_tp = '01' and spec_disc_lvl = '1')
+			or
+			spec_disc_tp in ('02','03'))
+			and mchnt_tp
+			not in
+			('8651','9211','9222','9223','9311','9399')
+		</if>
+		<if test="mccTp=='Z'.toString()">
+			and mchnt_tp in
+			('5411','4900','5541','5542','4111','4121','4131','4511','4784')
+			and
+			spec_disc_tp not in ('02','03')
+			and (spec_disc_tp!='01' or
+			spec_disc_lvl!='1')
+		</if>
+		<if test="startTime!=null">
+			and ACTUAL_DONE_TS &gt;= #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime!=null">
+			and ACTUAL_DONE_TS &lt;= #{endTime,jdbcType=TIMESTAMP}
+		</if>
+		and is_white_mchnt='1'
+		order by rand() fetch first 1 row only
+	</select>
+	<update id="updateByCommentsSelective" parameterType="com.unionpay.opdept.mchntaudit.orm.bean.TaskAssign">
+		update MMGM.TBL_MMGM_TASK_ASSIGN
+		<set>
+			<if test="mchntSrvTp != null">
+				MCHNT_SRV_TP = #{mchntSrvTp,jdbcType=CHAR},
+			</if>
+			<if test="mchntCd != null">
+				MCHNT_CD = #{mchntCd,jdbcType=CHAR},
+			</if>
+			<if test="mchntCnNm != null">
+				MCHNT_CN_NM = #{mchntCnNm,jdbcType=VARCHAR},
+			</if>
+			<if test="acqInsIdCd != null">
+				ACQ_INS_ID_CD = #{acqInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="acptInsIdCd != null">
+				ACPT_INS_ID_CD = #{acptInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="cupBranchInsIdCd != null">
+				CUP_BRANCH_INS_ID_CD =
+				#{cupBranchInsIdCd,jdbcType=VARCHAR},
+			</if>
+			<if test="connMd != null">
+				CONN_MD = #{connMd,jdbcType=CHAR},
+			</if>
+			<if test="mchntTp != null">
+				MCHNT_TP = #{mchntTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscTp != null">
+				SPEC_DISC_TP = #{specDiscTp,jdbcType=CHAR},
+			</if>
+			<if test="specDiscLvl != null">
+				SPEC_DISC_LVL = #{specDiscLvl,jdbcType=CHAR},
+			</if>
+			<if test="isWhiteMchnt != null">
+				IS_WHITE_MCHNT = #{isWhiteMchnt,jdbcType=CHAR},
+			</if>
+			<if test="acqCommitAuditTs != null">
+				ACQ_COMMIT_AUDIT_TS =
+				#{acqCommitAuditTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditSt != null">
+				AUDIT_ST = #{auditSt,jdbcType=CHAR},
+			</if>
+			<if test="mchntAuditId != null">
+				MCHNT_AUDIT_ID = #{mchntAuditId,jdbcType=CHAR},
+			</if>
+			<if test="assignTs != null">
+				ASSIGN_TS = #{assignTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assignUsrCd != null">
+				ASSIGN_USR_CD = #{assignUsrCd,jdbcType=VARCHAR},
+			</if>
+			<if test="assignGroupId != null">
+				ASSIGN_GROUP_ID = #{assignGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="planDoneTs != null">
+				PLAN_DONE_TS = #{planDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actualDoneTs != null">
+				ACTUAL_DONE_TS = #{actualDoneTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="taskResult != null">
+				TASK_RESULT = #{taskResult,jdbcType=CHAR},
+			</if>
+			<if test="mchntRating != null">
+				MCHNT_RATING = #{mchntRating,jdbcType=INTEGER},
+			</if>
+			<if test="pendingMemo != null">
+				PENDING_MEMO = #{pendingMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="rejectMemo != null">
+				REJECT_MEMO = #{rejectMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="recSt != null">
+				REC_ST = #{recSt,jdbcType=CHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="recCrtTs != null">
+				REC_CRT_TS = #{recCrtTs,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recUpdTs != null">
+				REC_UPD_TS = #{recUpdTs,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where TASK_ID = #{taskId,jdbcType=CHAR} and COMMENTS=''
+	</update>
+</mapper>

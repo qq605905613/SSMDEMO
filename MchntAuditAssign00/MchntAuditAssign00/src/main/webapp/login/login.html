@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/MchntAudit/jquery-3.0.0.min.js"></script>
+<script src="login/login.js"></script>
+<link href="/MchntAudit/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<html>
+<body ng-app="loginApp" ng-controller="loginCtrl">
+	<div class="login">
+		<h1>中国银联派单平台</h1>
+		<input type="text" name="u" placeholder="用户名" required="required"
+			ng-model="loginId"> <input type="password" name="p"
+			placeholder="密码" id="pwd" required="required" ng-model="pwd"/>
+		<button type="submit" class="btn btn-primary btn-block btn-large"
+			ng-click="submit()">登录</button>
+	</div>
+</body>
+</html>
